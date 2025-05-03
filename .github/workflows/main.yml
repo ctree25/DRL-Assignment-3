@@ -26,6 +26,7 @@ jobs:
     - name: 2. Installing dependencies
       run: |
         pip install gym
+        pip install matplotlib
         pip install --upgrade opencv-python-headless
         pip install -r requirements.txt
 
