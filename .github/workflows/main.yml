@@ -26,6 +26,7 @@ jobs:
     - name: 2. Installing dependencies
       run: |
         pip install gym
+        pip install --upgrade opencv-python-headless
         pip install -r requirements.txt
 
     - name: 3. Ensure env.so is executable
