@@ -23,7 +23,8 @@ state_size = env.observation_space.shape
 
 weight_pth = "weight.pth"
 q_net = DuelingQNet(action_size).to(device)
-q_net.load_state_dict(torch.load(weight_pth))
+state_dict = torch.load(weight_pth, map_location=device)
+q_net.load_state_dict(state_dict)
 q_net.eval()
 
 
