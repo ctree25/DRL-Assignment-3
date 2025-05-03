@@ -29,6 +29,8 @@ jobs:
         pip install matplotlib
         pip install imageio
         pip install IPython
+        pip install tensordict
+        pip install torchrl
         pip install --upgrade opencv-python-headless
         pip install -r requirements.txt
 
