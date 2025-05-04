@@ -21,7 +21,7 @@ state_size = env.observation_space.shape
 
 
 
-weight_pth = "weight.pth"
+weight_pth = "weight_2.pth"
 q_net = DuelingQNet(action_size).to(device)
 state_dict = torch.load(weight_pth, map_location=device)
 q_net.load_state_dict(state_dict)
@@ -40,7 +40,10 @@ class Agent(object):
 
     def act(self, observation):
 
-          # Ensure the observation is in the correct format
+        if self.skip_count > 0:
+            self.skip_count -= 1
+            return self.last_action
+        
         frame = cv2.resize(cv2.cvtColor(observation, cv2.COLOR_RGB2GRAY), (84, 84), interpolation=cv2.INTER_AREA)
         self.frames_q.append(frame)
 
@@ -50,9 +53,6 @@ class Agent(object):
                 self.frames_q.append(frame)
             self.initial = False
 
-        if self.skip_count > 0:
-            self.skip_count -= 1
-            return self.last_action
         
         state = np.stack(self.frames_q, axis=0)
         state = torch.tensor(state, device=device, dtype=torch.float32).unsqueeze(0).div_(255.0)
