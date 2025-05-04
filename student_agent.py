@@ -1,7 +1,7 @@
 import gym
 import torch
 import torch.nn as nn
-from train_my_dbystep_hupdate import DuelingQNet, SkipFrame
+from train_my_dbystep_exponentdecay import DuelingQNet, SkipFrame
 from nes_py.wrappers import JoypadSpace
 import gym_super_mario_bros
 from gym_super_mario_bros.actions import COMPLEX_MOVEMENT
