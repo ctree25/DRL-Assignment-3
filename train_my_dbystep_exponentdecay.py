@@ -213,9 +213,7 @@ def main():
     update_target_step = 10000
     episode = 0
     epsilon_start = 1.0
-    num_steps = 4 * 1000000
-    epsilon_min = 0.001
-    epsilon_decay_rate = 0.9999999
+    num_steps = 6 * 1000000 
 
     batch_size = 128
     warm_up_step = batch_size*50
@@ -300,7 +298,7 @@ def main():
         if step < 800_000:
             agent.epsilon = max(0.3, epsilon_start - step * (1.0-0.3)/800_000)   
         else:
-            agent.epsilon = max(0.01, agent.epsilon * 0.999995)   
+            agent.epsilon = max(0.001, agent.epsilon * 0.999995)
 
 
         if done:
@@ -321,24 +319,24 @@ def main():
 
         
 
-    torch.save(agent.q_net.state_dict(), f"./train_record/train_{train_record_num}/weight/dqn_weights.pth")
+    torch.save(agent.q_net.state_dict(), f"./dqn_weight.pth")
 
     avg_log.close()
     im_log.close()
 
-    plt.plot(reward_history)
-    plt.xlabel("Episode")
-    plt.ylabel("Total Reward")
-    plt.title("Training History")
-    plt.savefig(f"./train_record/train_{train_record_num}/training_reward_plot.png")  
-    plt.close()
+    # plt.plot(reward_history)
+    # plt.xlabel("Episode")
+    # plt.ylabel("Total Reward")
+    # plt.title("Training History")
+    # plt.savefig(f"./train_record/train_{train_record_num}/training_reward_plot.png")  
+    # plt.close()
 
-    plt.plot(avg_reward_history)
-    plt.xlabel("Episode")
-    plt.ylabel("Avg Reward")
-    plt.title("Avg Training History")
-    plt.savefig(f"./train_record/train_{train_record_num}/avg_training_reward_plot.png")  
-    plt.close()
+    # plt.plot(avg_reward_history)
+    # plt.xlabel("Episode")
+    # plt.ylabel("Avg Reward")
+    # plt.title("Avg Training History")
+    # plt.savefig(f"./train_record/train_{train_record_num}/avg_training_reward_plot.png")  
+    # plt.close()
 
 
 if __name__ == '__main__':
